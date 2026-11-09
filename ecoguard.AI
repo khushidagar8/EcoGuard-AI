@@ -1,0 +1,118 @@
+
+import tkinter as tk
+from tkinter import ttk, messagebox
+
+root = tk.Tk()
+root.title("EcoGuard AI - Environment Monitoring System")
+root.geometry("1100x700")
+root.configure(bg="#10251d")
+
+# Header
+header = tk.Frame(root, bg="#163d2b", height=90)
+header.pack(fill="x")
+
+tk.Label(
+    header,
+    text="🌿 EcoGuard AI",
+    font=("Arial", 25, "bold"),
+    bg="#163d2b",
+    fg="white"
+).pack(side="left", padx=25, pady=20)
+
+tk.Label(
+    header,
+    text="SMART ENVIRONMENT MONITORING",
+    font=("Arial", 11),
+    bg="#163d2b",
+    fg="#9ee6b2"
+).pack(side="right", padx=25)
+
+# Main title
+tk.Label(
+    root,
+    text="Environmental Control Center",
+    font=("Arial", 22, "bold"),
+    bg="#10251d",
+    fg="white"
+).pack(pady=25)
+
+# Dashboard cards
+cards = tk.Frame(root, bg="#10251d")
+cards.pack(pady=15)
+
+def create_card(title, value, column):
+    card = tk.Frame(cards, bg="#20543b", width=240, height=140)
+    card.grid(row=0, column=column, padx=12)
+    card.pack_propagate(False)
+
+    tk.Label(
+        card, text=title,
+        font=("Arial", 13, "bold"),
+        bg="#20543b", fg="white"
+    ).pack(pady=18)
+
+    tk.Label(
+        card, text=value,
+        font=("Arial", 22, "bold"),
+        bg="#20543b", fg="#9ee6b2"
+    ).pack()
+
+create_card("Air Quality Index", "--", 0)
+create_card("Water Quality", "--", 1)
+create_card("Waste Status", "--", 2)
+
+# Analysis section
+section = tk.Frame(root, bg="#10251d")
+section.pack(pady=30)
+
+tk.Label(
+    section,
+    text="Environmental Risk Analysis",
+    font=("Arial", 17, "bold"),
+    bg="#10251d",
+    fg="white"
+).pack(pady=10)
+
+tk.Label(
+    section,
+    text="Select an environmental parameter:",
+    font=("Arial", 12),
+    bg="#10251d",
+    fg="white"
+).pack(pady=10)
+
+parameter = ttk.Combobox(
+    section,
+    values=["Air Pollution", "Water Quality", "Waste Management"],
+    state="readonly",
+    width=30
+)
+parameter.pack(pady=8)
+parameter.set("Air Pollution")
+
+def analyze():
+    messagebox.showinfo(
+        "EcoGuard AI",
+        "Analysis module selected: " + parameter.get()
+    )
+
+tk.Button(
+    section,
+    text="START ANALYSIS",
+    command=analyze,
+    bg="#35a66a",
+    fg="white",
+    font=("Arial", 12, "bold"),
+    padx=25,
+    pady=10
+).pack(pady=20)
+
+tk.Label(
+    root,
+    text="EcoGuard AI | Smart & Sustainable Future",
+    font=("Arial", 10),
+    bg="#10251d",
+    fg="#9ee6b2"
+).pack(side="bottom", pady=20)
+
+root.mainloop()
